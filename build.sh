@@ -13,6 +13,7 @@ cd NEWISO
 find -follow -type f ! -name md5sum.txt -print0 | xargs -0 md5sum > ./md5sum.txt
 chmod -w ./md5sum.txt
 cd ..
-sudo genisoimage -r -J -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o debian.iso ./NEWISO
+genisoimage -r -J -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -o debian.iso ./NEWISO
+isohybrid --uefi debian.iso
 sudo rm -rf ./ORIGISO ./NEWISO
 
